@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archivo — Aprendesor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a7a30;
+    --verde2: #399b53;
+    --negro: #0A0A0A;
+    --blanco: #FFFFFF;
+    --gris-dark: #1F2937;
+    --gris-light: #D1D5DB;
+    --acento: #F59E0B;
+    --surface: #111111;
+    --border: rgba(57,155,83,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--negro); color: var(--blanco);
+    font-family: 'Space Mono', monospace; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 100; opacity: 0.3;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    padding: 18px 48px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 900;
+    letter-spacing: 0.15em; color: var(--blanco); text-decoration: none; text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-link {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-link:hover { color: var(--acento); }
+  .nav-link.active { color: var(--blanco); }
+
+  /* HERO */
+  .blog-hero {
+    overflow: hidden;
+    padding: 130px 64px 70px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .blog-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(rgba(57,155,83,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57,155,83,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .blog-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .blog-hero-tag {
+    font-family: 'Caveat', cursive; font-size: 1.05rem; color: var(--acento);
+    letter-spacing: 0.05em; display: block; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+  .blog-hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 400; line-height: 0.95; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+  }
+  .blog-hero-title em { color: var(--verde2); font-style: italic; display: block; }
+  .blog-hero-sub {
+    font-size: 0.72rem; line-height: 1.9; color: rgba(255,255,255,0.45); max-width: 480px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  /* FEATURED */
+  .featured-wrap {
+    max-width: 1100px; margin: 0 auto; padding: 56px 64px 0;
+  }
+  .featured-article {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--border); margin-bottom: 2px;
+    text-decoration: none; color: var(--blanco);
+    transition: border-color 0.3s;
+    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .featured-article:hover { border-color: rgba(57,155,83,0.45); }
+  .featured-article-visual {
+    background: linear-gradient(135deg, #0d1f10 0%, #0a0a0a 100%);
+    min-height: 360px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .featured-article-visual::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(rgba(57,155,83,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57,155,83,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .featured-visual-number {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: 9rem; color: rgba(57,155,83,0.12); line-height: 1; position: relative; z-index: 1;
+    user-select: none;
+  }
+  .featured-article-body { padding: 40px 44px; display: flex; flex-direction: column; justify-content: space-between; }
+  .featured-badge {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;
+  }
+  .featured-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--acento); }
+  .featured-label {
+    font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--acento);
+  }
+  .featured-title {
+    font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 20px;
+  }
+  .featured-excerpt {
+    font-size: 0.72rem; line-height: 1.9; color: rgba(255,255,255,0.45); margin-bottom: 32px; flex: 1;
+  }
+  .featured-meta { display: flex; align-items: center; justify-content: space-between; }
+  .featured-cat {
+    font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid var(--border); color: rgba(255,255,255,0.4);
+  }
+  .featured-arrow { font-size: 1.2rem; color: var(--verde2); transition: transform 0.3s; }
+  .featured-article:hover .featured-arrow { transform: translateX(5px); }
+
+  /* FILTERS */
+  .filters-wrap {
+    max-width: 1100px; margin: 0 auto; padding: 40px 64px 0;
+  }
+  .filters {
+    display: flex; align-items: center; gap: 2px; margin-bottom: 28px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 9px 18px; font-family: 'Space Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+    background: transparent; border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.25s;
+  }
+  .filter-btn:hover { border-color: var(--border); color: var(--blanco); }
+  .filter-btn.active {
+    background: var(--verde); border-color: var(--verde); color: var(--blanco);
+  }
+  .results-count {
+    font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.25); margin-left: auto; padding-left: 20px;
+  }
+
+  /* ARTICLES GRID */
+  .articles-wrap {
+    max-width: 1100px; margin: 0 auto; padding: 0 64px 80px;
+  }
+  .articles-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .article-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 28px 24px; text-decoration: none; color: var(--blanco);
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
+    transition: all 0.3s;
+    opacity: 0; transform: translateY(16px);
+  }
+  .article-card.visible { opacity: 1; transform: translateY(0); }
+  .article-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--verde2), var(--acento));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+  }
+  .article-card:hover { border-color: rgba(57,155,83,0.35); transform: translateY(-3px); }
+  .article-card:hover::before { transform: scaleX(1); }
+  .article-card-cat {
+    font-size: 0.48rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--acento); margin-bottom: 14px; display: block;
+  }
+  .article-card-title {
+    font-family: 'DM Serif Display', serif; font-size: 1.05rem;
+    font-weight: 400; line-height: 1.3; margin-bottom: 14px; flex: 1;
+  }
+  .article-card-excerpt {
+    font-size: 0.62rem; line-height: 1.75; color: rgba(255,255,255,0.38);
+    margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .article-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+  .article-card-read {
+    font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--verde2);
+    transition: letter-spacing 0.3s;
+  }
+  .article-card:hover .article-card-read { letter-spacing: 0.35em; }
+  .article-card-num { font-size: 0.48rem; color: rgba(255,255,255,0.15); }
+
+  /* LOAD MORE */
+  .load-more-wrap { text-align: center; padding: 40px 0 0; }
+  .btn-ghost {
+    background: transparent; color: var(--blanco); border: 1px solid rgba(255,255,255,0.15);
+    padding: 14px 40px; font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--acento); color: var(--acento); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.05); padding: 24px 64px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  footer p { font-size: 0.52rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 20px; }
+    .blog-hero {
+    overflow: hidden; padding: 100px 24px 48px; }
+    .featured-wrap, .filters-wrap, .articles-wrap { padding-left: 24px; padding-right: 24px; }
+    .featured-article { grid-template-columns: 1fr; }
+    .featured-article-visual { min-height: 180px; border-right: none; border-bottom: 1px solid var(--border); }
+    .articles-grid { grid-template-columns: 1fr; }
+    .filters { gap: 4px; }
+    footer { padding: 20px 24px; flex-direction: column; }
+  }
+  @media (max-width: 600px) {
+    .articles-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="aprendesor.html" class="nav-logo">APRENDE<span style="color:#399b53;">$</span>OR</a>
+  <div class="nav-links">
+    <a href="aprendesor.html" class="nav-link">Inicio</a>
+    <a href="cerebro.html" class="nav-link">Cerebro</a>
+    <a href="blog.html" class="nav-link active">Archivo</a>
+    <a href="manifiesto.html" class="nav-link">Manifiesto</a>
+    <a href="roadmap.html" class="nav-link">Roadmap</a>
+    <a href="redes.html" class="nav-link">Redes</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <span class="blog-hero-tag">✦ Del archivo</span>
+    <h1 class="blog-hero-title">
+      Palabras que
+      <em>construyen.</em>
+    </h1>
+    <p class="blog-hero-sub">Reflexiones sobre fe, disciplina, finanzas y negocios. Sin relleno. Sin motivación vacía. Solo lo que transforma.</p>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div class="featured-wrap">
+  <a href="#" class="featured-article">
+    <div class="featured-article-visual">
+      <span class="featured-visual-number">01</span>
+    </div>
+    <div class="featured-article-body">
+      <div>
+        <div class="featured-badge">
+          <div class="featured-dot"></div>
+          <span class="featured-label">Artículo destacado</span>
+        </div>
+        <h2 class="featured-title">La gracia no elimina la responsabilidad. La eleva.</h2>
+        <p class="featured-excerpt">La fe no anula la acción, la orienta. Por eso promovemos hábitos, orden y trabajo constante — no como fines en sí mismos, sino como medios para vivir conforme a la voluntad de Dios y servir mejor al prójimo.</p>
+      </div>
+      <div class="featured-meta">
+        <span class="featured-cat">Fe & Carácter</span>
+        <span class="featured-arrow">→</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-wrap">
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterArticles('all', this)">Todos</button>
+    <button class="filter-btn" onclick="filterArticles('fe', this)">Fe & Carácter</button>
+    <button class="filter-btn" onclick="filterArticles('disciplina', this)">Disciplina</button>
+    <button class="filter-btn" onclick="filterArticles('finanzas', this)">Finanzas</button>
+    <button class="filter-btn" onclick="filterArticles('negocios', this)">Negocios</button>
+    <span class="results-count" id="results-count">23 artículos</span>
+  </div>
+</div>
+
+<!-- ARTICLES GRID -->
+<div class="articles-wrap">
+  <div class="articles-grid" id="articles-grid">
+
+    <a href="#" class="article-card visible" data-cat="disciplina">
+      <span class="article-card-cat">Disciplina</span>
+      <h3 class="article-card-title">El hombre sin orden vive como esclavo.</h3>
+      <p class="article-card-excerpt">La sociedad moderna ha disfrazado la esclavitud de libertad. Sin estructura, el hombre no avanza — cae.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">02</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="fe">
+      <span class="article-card-cat">Fe & Carácter</span>
+      <h3 class="article-card-title">Cristo no es una referencia simbólica.</h3>
+      <p class="article-card-excerpt">Es el modelo perfecto de humanidad. El hombre que lo toma en serio cambia todo: su tiempo, su dinero, su carácter.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">03</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="finanzas">
+      <span class="article-card-cat">Finanzas</span>
+      <h3 class="article-card-title">Cómo pensar en el dinero si nunca te enseñaron.</h3>
+      <p class="article-card-excerpt">El dinero no es malo ni bueno. Es una herramienta. La pregunta es: ¿en manos de quién y para qué?</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">04</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="negocios">
+      <span class="article-card-cat">Negocios</span>
+      <h3 class="article-card-title">Antes de lanzar: las preguntas que debes responder.</h3>
+      <p class="article-card-excerpt">La mayoría falla no por falta de esfuerzo, sino por falta de claridad. Empieza por aquí.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">05</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="disciplina">
+      <span class="article-card-cat">Disciplina</span>
+      <h3 class="article-card-title">El sistema de hábitos que cambia tu trayectoria en 90 días.</h3>
+      <p class="article-card-excerpt">No se trata de motivación. Se trata de diseño. Cómo construir un sistema que funcione cuando no tienes ganas.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">06</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="fe">
+      <span class="article-card-cat">Fe & Carácter</span>
+      <h3 class="article-card-title">El hombre que huye del sufrimiento nunca desarrolla carácter.</h3>
+      <p class="article-card-excerpt">El carácter no se forja en la comodidad. Se forja en la resistencia, en la prueba, en la decisión de no rendirse.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">07</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="finanzas">
+      <span class="article-card-cat">Finanzas</span>
+      <h3 class="article-card-title">Del primer dólar al primer activo: el mapa completo.</h3>
+      <p class="article-card-excerpt">La ruta que nadie te enseñó. Del ingreso a la inversión, paso a paso, sin jerga ni trucos vacíos.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">08</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="negocios">
+      <span class="article-card-cat">Negocios</span>
+      <h3 class="article-card-title">Construir algo propio no es para todos. ¿Lo es para ti?</h3>
+      <p class="article-card-excerpt">Emprender es una vocación, no una moda. Antes de empezar, debes saber qué estás dispuesto a sacrificar.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">09</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card visible" data-cat="disciplina">
+      <span class="article-card-cat">Disciplina</span>
+      <h3 class="article-card-title">Por qué la dopamina fácil te está destruyendo.</h3>
+      <p class="article-card-excerpt">Redes sociales, pornografía, videojuegos. El enemigo no lleva espada. Lleva pantalla.</p>
+      <div class="article-card-footer">
+        <span class="article-card-read">Leer →</span>
+        <span class="article-card-num">10</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="load-more-wrap">
+    <button class="btn-ghost">Cargar más artículos</button>
+  </div>
+</div>
+
+<footer>
+  <p>© Grupo Aprendesor · Todos los derechos reservados</p>
+  <p>Dedicado a Jesús · Soli Deo Gloria</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const catColors = { fe:'#F59E0B', disciplina:'#F59E0B', finanzas:'#F59E0B', negocios:'#F59E0B' };
+const catCounts = { all:23, fe:8, disciplina:7, finanzas:5, negocios:4 };
+
+function filterArticles(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('results-count').textContent = (catCounts[cat] || 0) + ' artículos';
+
+  document.querySelectorAll('.article-card').forEach((card, i) => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = show ? 'flex' : 'none';
+    if (show) {
+      card.style.opacity = '0'; card.style.transform = 'translateY(16px)';
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+      }, i * 60);
+    }
+  });
+}
+
+// Check URL param
+const params = new URLSearchParams(window.location.search);
+const catParam = params.get('cat');
+if (catParam) {
+  const btn = document.querySelector(`.filter-btn[onclick*="${catParam}"]`);
+  if (btn) filterArticles(catParam, btn);
+}
+</script>
+
+<script>
+// Blog hero 3D — floating crystal shards background
+(function(){
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+  const hero = document.querySelector('.blog-hero');
+  if (!hero || typeof THREE === 'undefined') return;
+  hero.appendChild(canvas);
+
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setClearColor(0x000000,0);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
+  camera.position.set(0,0,8);
+
+  function resize(){
+    const w=canvas.parentElement.offsetWidth, h=canvas.parentElement.offsetHeight;
+    renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  scene.add(new THREE.AmbientLight(0x1a7a30, 0.3));
+  const l1=new THREE.PointLight(0x399b53,2,20); l1.position.set(4,3,3); scene.add(l1);
+  const l2=new THREE.PointLight(0xF59E0B,1,16); l2.position.set(-4,-2,2); scene.add(l2);
+
+  // Scattered tetrahedra — editorial feel
+  const shards=[];
+  for(let i=0;i<18;i++){
+    const s=0.12+Math.random()*.4;
+    const wire=Math.random()>0.35;
+    const m=new THREE.Mesh(
+      new THREE.TetrahedronGeometry(s,0),
+      wire ? new THREE.MeshBasicMaterial({color:i%3===0?0xF59E0B:0x399b53, wireframe:true, transparent:true, opacity:0.25+Math.random()*.25})
+           : new THREE.MeshPhongMaterial({color:0x0d2e14, transparent:true, opacity:0.1, shininess:200})
+    );
+    m.position.set((Math.random()-.5)*16,(Math.random()-.5)*8,(Math.random()-.5)*3-1);
+    m.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,Math.random()*Math.PI);
+    m.userData={vy:(Math.random()-.5)*.002, rx:Math.random()*.006+.002, ry:Math.random()*.005+.002, phase:Math.random()*Math.PI*2};
+    shards.push(m); scene.add(m);
+  }
+
+  // Large background icosahedron — right side
+  const bgIco=new THREE.Mesh(new THREE.IcosahedronGeometry(3,1), new THREE.MeshBasicMaterial({color:0x399b53,wireframe:true,transparent:true,opacity:0.055}));
+  bgIco.position.set(6,0,-2); scene.add(bgIco);
+
+  // Particles
+  const pGeo=new THREE.BufferGeometry(), pPos=new Float32Array(100*3), pPh=new Float32Array(100);
+  for(let i=0;i<100;i++){pPos[i*3]=(Math.random()-.5)*18;pPos[i*3+1]=(Math.random()-.5)*10;pPos[i*3+2]=(Math.random()-.5)*4-2;pPh[i]=Math.random()*Math.PI*2;}
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({color:0x399b53,size:0.016,transparent:true,opacity:0.4})));
+
+  let t=0;
+  (function anim(){
+    requestAnimationFrame(anim); t+=0.005;
+    shards.forEach(s=>{s.position.y+=Math.sin(t+s.userData.phase)*0.003;s.rotation.x+=s.userData.rx;s.rotation.y+=s.userData.ry;});
+    bgIco.rotation.y=t*.08; bgIco.rotation.x=t*.04;
+    l1.intensity=1.8+Math.sin(t*1.3)*.4;
+    renderer.render(scene,camera);
+  })();
+})();
+</script>
+
+</body>
+</html>
