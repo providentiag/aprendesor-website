@@ -289,6 +289,7 @@ footer p{font-size:.52rem;color:var(--gl);opacity:.22;letter-spacing:.12em;text-
   .ph{font-size:clamp(1.5rem,7vw,2.6rem);margin-bottom:40px;}
   .blog{padding:60px 20px;}
   .bg{grid-template-columns:1fr;}
+  .mob-hide{display:none;}
   .card.ft{grid-column:span 1;}
   .card{padding:26px 22px;}
   .cerebro-prev{padding:60px 20px;}
@@ -808,7 +809,7 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
     var grid = document.getElementById('blog-grid');
     if(!grid) return;
     var featured = articles[0];
-    var rest = articles.slice(1, 6); // 5 more cards = 6 total
+    var rest = articles.slice(1, 6);
     var html = '';
     if(featured){
       html += '<article class="card ft" style="cursor:pointer;" onclick="location.href=\'articulo.html?id=' + featured.id + '\'">';
@@ -820,8 +821,9 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
       html += '<a href="articulo.html?id=' + featured.id + '" class="cl" style="white-space:nowrap;">Leer →</a>';
       html += '</article>';
     }
-    rest.forEach(function(a){
-      html += '<article class="card" style="cursor:pointer;" onclick="location.href=\'articulo.html?id=' + a.id + '\'">';
+    rest.forEach(function(a, i){
+      var hideClass = i >= 2 ? ' mob-hide' : '';
+      html += '<article class="card' + hideClass + '" style="cursor:pointer;" onclick="location.href=\'articulo.html?id=' + a.id + '\'">';
       html += '<span class="ccat">' + (CAT_LABELS[a.categoria]||a.categoria) + '</span>';
       html += '<h3 class="ctit">' + a.titulo + '</h3>';
       html += '<p class="cex">' + a.excerpt + '</p>';
