@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WCMNKK5LSZ"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WCMNKK5LSZ');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursos Gratuitos — Aprendesor</title>
+  <meta name="description" content="Guías, frameworks y herramientas gratuitas para construir fe, disciplina y libertad financiera. Descarga cualquier recurso con tu correo.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Aprendesor">
+  <meta name="theme-color" content="#1a7a30">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Recursos Gratuitos — Aprendesor">
+  <meta property="og:description" content="Guías, frameworks y herramientas gratuitas para construir fe, disciplina y libertad financiera.">
+  <meta property="og:url" content="https://aprendesor.com/recursos.html">
+  <meta property="og:image" content="https://aprendesor.com/logo.png">
+  <meta property="og:site_name" content="Aprendesor">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Recursos Gratuitos — Aprendesor">
+  <meta name="twitter:description" content="Guías, frameworks y herramientas gratuitas para construir fe, disciplina y libertad financiera.">
+  <meta name="twitter:image" content="https://aprendesor.com/logo.png">
+  <meta name="twitter:site" content="@Aprendesor">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="canonical" href="https://aprendesor.com/recursos.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--v:#1a7a30;--v2:#399b53;--n:#0A0A0A;--b:#FFFFFF;--a:#F59E0B;--br:rgba(57,155,83,0.18);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--n);color:var(--b);font-family:'Space Mono',monospace;overflow-x:hidden;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;transition:background .4s;}
+nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--br);}
+.n-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;letter-spacing:.15em;color:#fff;text-decoration:none;text-transform:uppercase;}
+.n-logo .d{color:#399b53;}
+.n-links{display:flex;gap:28px;align-items:center;}
+.n-links a{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:color .3s;}
+.n-links a:hover,.n-links a.on{color:var(--a);}
+.n-tag{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:none;background:transparent;z-index:300;}
+.ham span{display:block;width:22px;height:1.5px;background:#fff;transition:transform .3s,opacity .3s;}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-menu{display:none;position:fixed;inset:0;z-index:250;background:rgba(10,10,10,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(-8px);transition:opacity .3s,transform .3s;pointer-events:none;}
+.mob-menu.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.mob-menu a{font-family:'Space Mono',monospace;font-size:1rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;padding:20px 0;width:100%;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);transition:color .25s;}
+.mob-menu a:first-child{border-top:1px solid rgba(255,255,255,.06);}
+.mob-menu a:hover,.mob-menu a.on{color:var(--a);}
+@media(max-width:768px){nav{padding:16px 20px;}.ham{display:flex;}.n-links,.n-tag{display:none!important;}.mob-menu{display:flex;}}
+/* HERO */
+#c-res{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.hero-inner{position:relative;z-index:1;}
+.hero{min-height:52vh;display:flex;align-items:flex-end;padding:130px 64px 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--br);}
+.hero-grid{position:absolute;inset:0;background:linear-gradient(rgba(57,155,83,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(57,155,83,.05) 1px,transparent 1px);background-size:48px 48px;}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1;}
+.hero-tag{font-family:'Caveat',cursive;font-size:1.05rem;color:var(--a);display:block;margin-bottom:16px;opacity:0;animation:fu .6s ease .2s forwards;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:400;line-height:.95;margin-bottom:20px;opacity:0;animation:fu .8s ease .35s forwards;}
+.hero-title em{color:var(--v2);font-style:italic;display:block;}
+.hero-sub{font-size:.72rem;line-height:1.9;color:rgba(255,255,255,.45);max-width:480px;opacity:0;animation:fu .8s ease .5s forwards;}
+/* TAGLINE BAR */
+.tagline-bar{border-bottom:1px solid var(--br);padding:22px 64px;}
+.tagline-inner{max-width:1100px;margin:0 auto;text-align:center;}
+.tagline-text{font-family:'DM Serif Display',serif;font-size:clamp(.9rem,1.6vw,1.1rem);font-style:italic;color:rgba(255,255,255,.4);}
+/* FILTROS */
+.filter-wrap{max-width:1100px;margin:0 auto;padding:48px 64px 0;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+.filt{font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.4);cursor:pointer;transition:border-color .25s,color .25s,background .25s;}
+.filt:hover{border-color:var(--br);color:rgba(255,255,255,.7);}
+.filt.active{border-color:var(--v2);color:var(--v2);background:rgba(57,155,83,.06);}
+/* GRID */
+.res-wrap{max-width:1100px;margin:0 auto;padding:32px 64px 80px;}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.res-card{background:#111;border:1px solid rgba(255,255,255,.06);padding:28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;text-decoration:none;color:var(--b);transition:border-color .3s,background .3s;}
+.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--v2),transparent);opacity:0;transition:opacity .3s;}
+.res-card:hover{border-color:var(--br);background:rgba(57,155,83,.03);}
+.res-card:hover::before{opacity:1;}
+.res-top{display:flex;align-items:center;justify-content:space-between;}
+.res-cat{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--a);}
+.res-pages{font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.res-title{font-family:'DM Serif Display',serif;font-size:1.08rem;font-weight:400;line-height:1.25;}
+.res-excerpt{font-size:.6rem;line-height:1.8;color:rgba(255,255,255,.35);flex:1;}
+.res-cta{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+.res-read{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--v2);transition:color .25s;}
+.res-card:hover .res-read{color:var(--a);}
+.res-arrow{color:rgba(255,255,255,.2);transition:transform .3s,color .3s;}
+.res-card:hover .res-arrow{transform:translateX(4px);color:var(--a);}
+
+
+footer{border-top:1px solid rgba(255,255,255,.05);padding:24px 64px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+footer p{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+@keyframes fu{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:900px){
+  .hero{padding:110px 24px 48px;min-height:auto;}
+  .tagline-bar{padding:18px 24px;}
+  .filter-wrap,.res-wrap{padding-left:24px;padding-right:24px;}
+  .res-grid{grid-template-columns:1fr;}
+  footer{padding:20px 24px;flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="aprendesor.html" class="n-logo">APRENDE<span class="d">$</span>OR</a>
+  <div class="n-links">
+    <a href="aprendesor.html">Inicio</a>
+    <a href="cerebro.html">Cerebro</a>
+    <a href="blog.html">Archivo</a>
+    <a href="recursos.html" class="on">Recursos</a>
+    <a href="manifiesto.html">Manifiesto</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="redes.html">Redes</a>
+  </div>
+  <span class="n-tag">Dedicado a Jesús</span>
+  <button id="ham-btn" class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="mob-menu" class="mob-menu">
+  <a href="aprendesor.html">Inicio</a>
+  <a href="cerebro.html">Cerebro</a>
+  <a href="blog.html">Archivo</a>
+  <a href="recursos.html" class="on">Recursos</a>
+  <a href="manifiesto.html">Manifiesto</a>
+  <a href="roadmap.html">Roadmap</a>
+  <a href="redes.html">Redes</a>
+  <span style="font-family:'Caveat',cursive;font-size:.9rem;color:rgba(245,158,11,.55);letter-spacing:.08em;margin-top:8px;">✦ Dedicado a Jesús</span>
+</div>
+
+<div class="hero">
+  <div class="hero-grid"></div>
+  <canvas id="c-res"></canvas>
+  <div class="hero-inner">
+    <span class="hero-tag">Biblioteca gratuita</span>
+    <h1 class="hero-title">Recursos<br><em>Aprendesor</em></h1>
+    <p class="hero-sub">Guías detalladas y frameworks para el hombre que construye fe, disciplina y libertad financiera. Lee online o descarga el PDF.</p>
+  </div>
+</div>
+
+<div class="tagline-bar">
+  <div class="tagline-inner">
+    <p class="tagline-text">Creando las herramientas para que seas tu mejor versión.</p>
+  </div>
+</div>
+
+<div class="filter-wrap">
+  <div class="filter-row">
+    <button class="filt active" data-cat="all">Todos</button>
+    <button class="filt" data-cat="fe">Fe y Carácter</button>
+    <button class="filt" data-cat="disciplina">Disciplina</button>
+    <button class="filt" data-cat="finanzas">Finanzas</button>
+    <button class="filt" data-cat="negocios">Negocios</button>
+  </div>
+</div>
+
+<div class="res-wrap">
+  <div class="res-grid" id="res-grid"></div>
+</div>
+
+    <div>
+      <div class="nl-form">
+        <input type="email" class="nl-inp" id="nl-email" placeholder="tucorreo@gmail.com">
+        <button class="nl-btn" onclick="nlSubmit()">Suscribirse →</button>
+      </div>
+      <p style="font-size:.44rem;color:rgba(255,255,255,.18);margin-top:8px;">Más de 3,000 suscriptores. Cancela cuando quieras.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Grupo Aprendesor — Todos los derechos reservados</p>
+  <p>Dedicado a Jesús — Soli Deo Gloria</p>
+</footer>
+
+    <div class="modal-success" id="modal-success">
+      <div class="modal-success-icon">✦</div>
+      <h3 class="modal-success-t">¡Listo, hermano!</h3>
+      <p class="modal-success-s">Tu descarga comenzará en un momento.<br>Revisa también tu correo.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+var CAT_LABELS = {fe:'Fe y Carácter', disciplina:'Disciplina', finanzas:'Finanzas', negocios:'Negocios'};
+var RECURSOS_DATA = [];
+
+function loadRecursos(cb){
+  fetch('recursos.json').then(function(r){return r.json();}).then(cb).catch(function(){cb([]);});
+}
+
+function renderCards(cat){
+  var grid = document.getElementById('res-grid');
+  var filtered = cat === 'all' ? RECURSOS_DATA : RECURSOS_DATA.filter(function(r){return r.cat===cat;});
+  grid.innerHTML = filtered.map(function(r){
+    return '<a href="guia.html?id='+r.id+'" class="res-card">'
+      +'<div class="res-top"><span class="res-cat">'+r.catLabel+'</span><span class="res-pages">'+r.paginas+'</span></div>'
+      +'<h3 class="res-title">'+r.titulo+'</h3>'
+      +'<p class="res-excerpt">'+r.excerpt+'</p>'
+      +'<div class="res-cta"><span class="res-read">Leer guía</span><span class="res-arrow">→</span></div>'
+      +'</a>';
+  }).join('');
+}
+
+loadRecursos(function(data){
+  RECURSOS_DATA = data;
+  renderCards('all');
+});
+
+document.querySelectorAll('.filt').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.filt').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    renderCards(btn.dataset.cat);
+  });
+});
+
+(function(){
+  var nav=document.getElementById('nav');
+  if(nav) window.addEventListener('scroll',function(){nav.classList.toggle('on',scrollY>40);},{passive:true});
+  var btn=document.getElementById('ham-btn'), menu=document.getElementById('mob-menu');
+  if(!btn||!menu) return;
+  btn.addEventListener('click',function(){btn.classList.toggle('open');menu.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':'';});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){btn.classList.remove('open');menu.classList.remove('open');document.body.style.overflow='';});});
+})();
+</script>
+
+<!-- THREE.JS: Partículas formando libro -->
+<script>
+(function(){
+  if(typeof THREE==='undefined') return;
+  var gx=0, gy=0;
+  document.addEventListener('mousemove',function(e){gx=(e.clientX/innerWidth-.5)*2;gy=(e.clientY/innerHeight-.5)*2;});
+  var el=document.getElementById('c-res');
+  if(!el) return;
+  var scene=new THREE.Scene(), cam=new THREE.PerspectiveCamera(45,1,.1,1000);
+  cam.position.set(0,0,12);
+  var renderer=new THREE.WebGLRenderer({canvas:el,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setClearColor(0,0);
+  function fit(){var p=el.parentElement,w=p.offsetWidth,h=p.offsetHeight;renderer.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  window.addEventListener('resize',fit); fit();
+  var OX=3.6, N=2600;
+  var targets=new Float32Array(N*3), current=new Float32Array(N*3), velocity=new Float32Array(N*3), phases=new Float32Array(N), colorArr=new Float32Array(N*3);
+  var W2=2.2,H2=2.8,D=0.18;
+  for(var i=0;i<N;i++){
+    var t2=i/N, r2=Math.random(), px,py,pz;
+    if(r2<0.38){px=-D*.5-Math.random()*(W2-D);py=(Math.random()-.5)*H2;pz=(px+D*.5)*.22;}
+    else if(r2<0.76){px=D*.5+Math.random()*(W2-D);py=(Math.random()-.5)*H2;pz=-(px-D*.5)*.22;}
+    else if(r2<0.88){var ang=(Math.random()-.5)*Math.PI*.55;px=Math.sin(ang)*D;py=(Math.random()-.5)*H2;pz=Math.cos(ang)*D*.5;}
+    else if(r2<0.94){var s2=Math.random()<.5?-1:1;px=s2*(D*.5+Math.random()*(W2-D));py=H2*.5;pz=(Math.random()-.5)*.3;}
+    else{var s3=Math.random()<.5?-1:1;px=s3*(D*.5+Math.random()*(W2-D));py=-H2*.5;pz=(Math.random()-.5)*.3;}
+    targets[i*3]=px+OX; targets[i*3+1]=py; targets[i*3+2]=pz;
+    current[i*3]=(Math.random()-.5)*14+OX; current[i*3+1]=(Math.random()-.5)*10; current[i*3+2]=(Math.random()-.5)*8;
+    phases[i]=Math.random()*Math.PI*2;
+    var mix=Math.max(0,Math.min(1,(px+W2)/(W2*2)));
+    colorArr[i*3]=.22+mix*(.96-.22); colorArr[i*3+1]=.608+mix*(.62-.608); colorArr[i*3+2]=.325+mix*(.04-.325);
+  }
+  var geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(current,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(colorArr,3));
+  var mat=new THREE.PointsMaterial({size:.03,vertexColors:true,transparent:true,opacity:0,sizeAttenuation:true});
+  scene.add(new THREE.Points(geo,mat));
+  var ambN=160, ambPos=new Float32Array(ambN*3), ambPh=new Float32Array(ambN);
+  for(var i=0;i<ambN;i++){ambPos[i*3]=(Math.random()-.5)*10+OX;ambPos[i*3+1]=(Math.random()-.5)*8;ambPos[i*3+2]=(Math.random()-.5)*5-1;ambPh[i]=Math.random()*Math.PI*2;}
+  var ambGeo=new THREE.BufferGeometry(); ambGeo.setAttribute('position',new THREE.BufferAttribute(ambPos,3));
+  var ambMat=new THREE.PointsMaterial({color:0xF59E0B,size:.013,transparent:true,opacity:0,sizeAttenuation:true});
+  scene.add(new THREE.Points(ambGeo,ambMat));
+  var elapsed=0, phase=0, FORM_START=.6, FORM_END=2.4, t=0;
+  (function loop(){
+    requestAnimationFrame(loop); t+=.016; elapsed+=.016;
+    if(elapsed>FORM_START&&phase===0) phase=1;
+    if(elapsed>FORM_END&&phase===1) phase=2;
+    mat.opacity=Math.min(.88,mat.opacity+.008);
+    ambMat.opacity=Math.min(.32,ambMat.opacity+.004);
+    var rotY=gx*.28+Math.sin(t*.12)*.07, rotX=gy*.14+Math.sin(t*.09)*.03;
+    var cosY=Math.cos(rotY), sinY=Math.sin(rotY), cosX=Math.cos(rotX), sinX=Math.sin(rotX);
+    var pa=geo.attributes.position.array;
+    for(var i=0;i<N;i++){
+      var tx=targets[i*3], ty=targets[i*3+1], tz=targets[i*3+2];
+      if(phase===0){current[i*3]+=(Math.random()-.5)*.04;current[i*3+1]+=(Math.random()-.5)*.04;current[i*3+2]+=(Math.random()-.5)*.04;}
+      else{
+        var stiffness=phase===1?.055:.028, damping=.82;
+        var breathe=phase===2?Math.sin(t*.6+phases[i])*.018:0;
+        velocity[i*3]=velocity[i*3]*damping+(tx+breathe-current[i*3])*stiffness;
+        velocity[i*3+1]=velocity[i*3+1]*damping+(ty+breathe*.5-current[i*3+1])*stiffness;
+        velocity[i*3+2]=velocity[i*3+2]*damping+(tz-current[i*3+2])*stiffness;
+        current[i*3]+=velocity[i*3]; current[i*3+1]+=velocity[i*3+1]; current[i*3+2]+=velocity[i*3+2];
+      }
+      var lx=current[i*3]-OX, ly=current[i*3+1], lz=current[i*3+2];
+      var rx=lx*cosY-lz*sinY, rz=lx*sinY+lz*cosY;
+      var ry2=ly*cosX-rz*sinX, rz2=ly*sinX+rz*cosX;
+      pa[i*3]=rx+OX; pa[i*3+1]=ry2; pa[i*3+2]=rz2;
+    }
+    geo.attributes.position.needsUpdate=true;
+    var aa=ambGeo.attributes.position.array;
+    for(var i=0;i<ambN;i++){aa[i*3]+=Math.cos(t*.3+ambPh[i])*.0006;aa[i*3+1]+=Math.sin(t*.4+ambPh[i])*.0008;}
+    ambGeo.attributes.position.needsUpdate=true;
+    cam.position.x+=(gx*.6-cam.position.x)*.025;
+    cam.position.y+=(-gy*.4-cam.position.y)*.025;
+    cam.lookAt(new THREE.Vector3(OX,0,0));
+    renderer.render(scene,cam);
+  })();
+})();
+</script>
+</body>
+</html>
