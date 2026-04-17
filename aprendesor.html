@@ -114,13 +114,22 @@ body{background:var(--n);color:var(--b);font-family:'Space Mono',monospace;overf
 .bt .gr{color:var(--v2);}
 .bsb{font-size:.68rem;color:var(--gl);letter-spacing:.15em;text-transform:uppercase;margin-bottom:52px;opacity:0;transition:opacity .8s .1s;}
 .bsb.v{opacity:.45;}
-.bg{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.bg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;}
+.bfilt{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;opacity:0;transition:opacity .8s .15s;}
+.bfilt.v{opacity:1;}
+.bf{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);cursor:pointer;transition:border-color .25s,color .25s,background .25s;}
+.bf.act{border-color:var(--v2);color:var(--b);background:rgba(57,155,83,.12);}
+.bf:hover{border-color:var(--v2);color:var(--b);}
+.blog-more{display:flex;align-items:center;gap:20px;margin-top:36px;opacity:0;transform:translateY(14px);transition:opacity .8s .3s,transform .8s .3s;}
+.blog-more.v{opacity:1;transform:translateY(0);}
+.blog-more-line{flex:1;height:1px;background:rgba(255,255,255,.07);}
 .card{background:#1a2332;padding:36px;position:relative;overflow:hidden;transition:background .35s,opacity .8s,transform .8s;opacity:0;transform:translateY(28px);}
 .card.v{opacity:1;transform:translateY(0);}
 .card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--v2);transform:scaleY(0);transform-origin:bottom;transition:transform .35s;}
 .card:hover{background:#243040;}
 .card:hover::before{transform:scaleY(1);}
-.card.ft{grid-row:span 2;background:var(--v);display:flex;flex-direction:column;justify-content:space-between;min-height:360px;}
+.card.ft{grid-column:1/-1;background:var(--v);display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;padding:44px;}
+.card.ft .ft-body{display:flex;flex-direction:column;gap:0;}
 .card.ft::before{background:var(--a);}
 .card.ft:hover{background:var(--v2);}
 .ccat{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--a);margin-bottom:18px;display:block;}
@@ -247,8 +256,18 @@ body{background:var(--n);color:var(--b);font-family:'Space Mono',monospace;overf
 .sh2{font-family:'Caveat',cursive;font-size:.95rem;color:var(--a);}
 
 /* FOOTER */
-footer{border-top:1px solid rgba(255,255,255,.06);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-footer p{font-size:.55rem;color:var(--gl);opacity:.28;letter-spacing:.14em;text-transform:uppercase;}
+footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 48px 28px;}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.ft-brand{display:flex;flex-direction:column;gap:10px;max-width:240px;}
+.ft-logo{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--b);}
+.ft-tagline{font-size:.58rem;line-height:1.7;color:rgba(255,255,255,.28);letter-spacing:.04em;}
+.ft-links{display:flex;gap:48px;flex-wrap:wrap;}
+.ft-col{display:flex;flex-direction:column;gap:12px;}
+.ft-col-title{font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:var(--v2);margin-bottom:4px;}
+.ft-col a{font-size:.58rem;color:rgba(255,255,255,.35);text-decoration:none;letter-spacing:.06em;transition:color .25s;}
+.ft-col a:hover{color:var(--a);}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+footer p{font-size:.52rem;color:var(--gl);opacity:.22;letter-spacing:.12em;text-transform:uppercase;}
 
 /* ANIMATIONS */
 @keyframes fu{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
@@ -270,13 +289,14 @@ footer p{font-size:.55rem;color:var(--gl);opacity:.28;letter-spacing:.14em;text-
   .ph{font-size:clamp(1.5rem,7vw,2.6rem);margin-bottom:40px;}
   .blog{padding:60px 20px;}
   .bg{grid-template-columns:1fr;}
-  .card.ft{grid-row:span 1;min-height:auto;}
+  .mob-hide{display:none;}
+  .card.ft{grid-column:span 1;}
   .card{padding:26px 22px;}
   .cerebro-prev{padding:60px 20px;}
   .cp-inner{grid-template-columns:1fr;gap:32px;}
   .redes{padding:60px 20px;}
   .sc{width:96px;height:96px;}
-  footer{padding:20px;flex-direction:column;align-items:flex-start;}
+  footer{padding:32px 20px 20px;}.ft-top{flex-direction:column;gap:32px;}.ft-links{gap:28px;}.ft-bottom{flex-direction:column;align-items:flex-start;}
   /* Extra small */
   @media(max-width:480px){
     .ht{font-size:clamp(2.8rem,13vw,4rem);}
@@ -343,6 +363,90 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
   .ham{display:flex;}
   .n-links,.n-tag{display:none!important;}
   .mob-menu{display:flex;}
+}
+
+/* ── RECURSOS PREVIEW ─────────────────────────────────────────────────── */
+.recursos-prev {
+  padding: 110px 48px;
+  border-top: 1px solid rgba(255,255,255,.05);
+  position: relative; overflow: hidden;
+}
+.rp-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.rp-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.rp-num { font-family: 'Caveat', cursive; font-size: .9rem; color: var(--v2); }
+.rp-line { flex: 1; height: 1px; background: rgba(255,255,255,.09); }
+.rp-tag { font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.28); white-space: nowrap; }
+.rp-title {
+  font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 400; line-height: .95; margin-bottom: 18px;
+  opacity: 0; transform: translateY(20px); transition: opacity .8s, transform .8s;
+}
+.rp-title.v { opacity: 1; transform: translateY(0); }
+.rp-title em { color: var(--v2); font-style: italic; display: block; }
+.rp-desc {
+  font-size: .68rem; line-height: 1.85; color: rgba(255,255,255,.45);
+  max-width: 380px; margin-bottom: 28px;
+  opacity: 0; transform: translateY(16px); transition: opacity .8s .15s, transform .8s .15s;
+}
+.rp-desc.v { opacity: 1; transform: translateY(0); }
+.rp-cta {
+  opacity: 0; transform: translateY(14px); transition: opacity .8s .3s, transform .8s .3s;
+}
+.rp-cta.v { opacity: 1; transform: translateY(0); }
+/* Grid de tarjetas derecha */
+.rp-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  opacity: 0; transform: translateY(24px); transition: opacity .9s .2s, transform .9s .2s;
+}
+.rp-cards.v { opacity: 1; transform: translateY(0); }
+.rp-card {
+  background: #0f0f0f; border: 1px solid rgba(255,255,255,.06);
+  padding: 20px; text-decoration: none; color: var(--b);
+  position: relative; overflow: hidden;
+  transition: border-color .3s, background .3s;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rp-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--v2); transform: scaleY(0); transform-origin: bottom;
+  transition: transform .3s;
+}
+.rp-card:hover { border-color: var(--br); background: rgba(57,155,83,.03); }
+.rp-card:hover::before { transform: scaleY(1); }
+.rp-card-cat {
+  font-size: .4rem; letter-spacing: .22em; text-transform: uppercase; color: var(--a);
+}
+.rp-card-title {
+  font-family: 'DM Serif Display', serif; font-size: .88rem;
+  font-weight: 400; line-height: 1.3; color: var(--b);
+}
+.rp-card-arr {
+  font-size: .65rem; color: rgba(255,255,255,.2); margin-top: auto;
+  transition: color .3s, transform .3s;
+}
+.rp-card:hover .rp-card-arr { color: var(--v2); transform: translateX(3px); }
+/* Card destacada (primera) */
+.rp-card.featured {
+  grid-column: 1 / -1; background: rgba(26,122,48,.06);
+  border-color: rgba(57,155,83,.2); flex-direction: row; align-items: center; gap: 16px;
+}
+.rp-card.featured .rp-card-title { font-size: 1rem; flex: 1; }
+.rp-card.featured::before { width: 3px; background: var(--a); }
+.rp-ver-mas {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .52rem; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); text-decoration: none;
+  margin-top: 16px; transition: color .3s;
+}
+.rp-ver-mas:hover { color: var(--a); }
+@media(max-width:900px){
+  .recursos-prev { padding: 80px 24px; }
+  .rp-inner { grid-template-columns: 1fr; gap: 48px; }
+  .rp-cards { grid-template-columns: 1fr; }
+  .rp-card.featured { flex-direction: column; }
 }
 </style></head>
 <body>
@@ -440,28 +544,19 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
   <div class="bi">
     <div class="sh"><span class="sn">// 02</span><div class="sl2"></div><span class="st">Del archivo</span></div>
     <h2 class="bt">Palabras que<br><span class="gr">construyen</span>.</h2>
-    <p class="bsb">Reflexiones sobre fe, disciplina y propósito.</p>
-    <div class="bg">
-      <article class="card ft">
-        <div>
-          <span class="ccat">Manifiesto</span>
-          <h3 class="ctit">La gracia no elimina la responsabilidad. La eleva.</h3>
-          <p class="cex">La fe no anula la acción, la orienta. Por eso promovemos hábitos, orden y trabajo constante — no como fines en sí mismos, sino como medios para vivir conforme a la voluntad de Dios.</p>
-        </div>
-        <a href="blog.html" class="cl">Leer →</a>
-      </article>
-      <article class="card">
-        <span class="ccat">Disciplina</span>
-        <h3 class="ctit">El hombre sin orden vive como esclavo.</h3>
-        <p class="cex">La sociedad moderna ha disfrazado la esclavitud de libertad. Sin estructura, el hombre no avanza — cae.</p>
-        <a href="blog.html" class="cl">Leer →</a>
-      </article>
-      <article class="card">
-        <span class="ccat">Fe</span>
-        <h3 class="ctit">Cristo no es una referencia simbólica.</h3>
-        <p class="cex">Es el modelo perfecto de humanidad. El hombre que lo toma en serio cambia todo: su tiempo, su dinero, su carácter.</p>
-        <a href="blog.html" class="cl">Leer →</a>
-      </article>
+    <p class="bsb">63 artículos sobre fe, disciplina, finanzas y negocios.</p>
+    <div class="bfilt" id="bfilt">
+      <button class="bf act" data-cat="all">Todo</button>
+      <button class="bf" data-cat="fe">Fe</button>
+      <button class="bf" data-cat="disciplina">Disciplina</button>
+      <button class="bf" data-cat="finanzas">Finanzas</button>
+      <button class="bf" data-cat="negocios">Negocios</button>
+    </div>
+    <div class="bg" id="blog-grid"></div>
+    <div class="blog-more" id="blog-more">
+      <div class="blog-more-line"></div>
+      <a href="blog.html" class="mctb"><span>Ver los 63 artículos</span><span class="mcta-arr">→</span></a>
+      <div class="blog-more-line"></div>
     </div>
   </div>
 </section>
@@ -515,6 +610,57 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
   </div>
 </section>
 
+
+<!-- RECURSOS PREVIEW -->
+<section class="recursos-prev" id="recursos">
+  <div class="rp-inner">
+    <div class="rp-left">
+      <div class="rp-header">
+        <span class="rp-num">// 04</span>
+        <div class="rp-line"></div>
+        <span class="rp-tag">Biblioteca gratuita</span>
+      </div>
+      <h2 class="rp-title" id="rp-title">Recursos<br><em>Aprendesor</em></h2>
+      <p class="rp-desc" id="rp-desc">Guías detalladas y frameworks para construir fe, disciplina y libertad financiera. Lee online, sin costo, sin registro.</p>
+      <div class="rp-cta" id="rp-cta">
+        <a href="recursos.html" class="btn"><span>Ver todos los recursos</span><span>&#8594;</span></a>
+        <a href="recursos.html" class="rp-ver-mas">11 guías disponibles &#8594;</a>
+      </div>
+    </div>
+    <div class="rp-right">
+      <div class="rp-cards" id="rp-cards">
+        <a href="guia.html?id=fe-g01" class="rp-card featured">
+          <div>
+            <span class="rp-card-cat">Fe y Carácter</span>
+            <div class="rp-card-title">Las 7 Batallas del Hombre Joven</div>
+          </div>
+          <span class="rp-card-arr">&#8594;</span>
+        </a>
+        <a href="guia.html?id=disc-g04" class="rp-card">
+          <span class="rp-card-cat">Disciplina</span>
+          <div class="rp-card-title">Rutina Matutina de Élite</div>
+          <span class="rp-card-arr">&#8594;</span>
+        </a>
+        <a href="guia.html?id=fin-g02" class="rp-card">
+          <span class="rp-card-cat">Finanzas</span>
+          <div class="rp-card-title">Del Primer Dólar al Primer Activo</div>
+          <span class="rp-card-arr">&#8594;</span>
+        </a>
+        <a href="guia.html?id=disc-g05" class="rp-card">
+          <span class="rp-card-cat">Disciplina</span>
+          <div class="rp-card-title">Cuerpo de Élite</div>
+          <span class="rp-card-arr">&#8594;</span>
+        </a>
+        <a href="guia.html?id=neg-g01" class="rp-card">
+          <span class="rp-card-cat">Negocios</span>
+          <div class="rp-card-title">Valida tu Idea en 48 Horas</div>
+          <span class="rp-card-arr">&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- REDES -->
 <section class="redes" id="redes">
   <canvas id="credes"></canvas>
@@ -546,8 +692,35 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
 </section>
 
 <footer>
-  <p>© Grupo Aprendesor · Todos los derechos reservados</p>
-  <p>Dedicado a Jesús · Soli Deo Gloria</p>
+  <div class="ft-top">
+    <div class="ft-brand">
+      <span class="ft-logo">Aprendesor</span>
+      <span class="ft-tagline">Fe, disciplina y propósito para el joven latino.</span>
+    </div>
+    <div class="ft-links">
+      <div class="ft-col">
+        <span class="ft-col-title">Contenido</span>
+        <a href="blog.html">Artículos</a>
+        <a href="cerebro.html">Cerebro</a>
+        <a href="manifiesto.html">Manifiesto</a>
+      </div>
+      <div class="ft-col">
+        <span class="ft-col-title">Comunidad</span>
+        <a href="https://discord.gg/Ye4f9PmFtQ" target="_blank">Discord</a>
+        <a href="https://aprendesor.beehiiv.com" target="_blank">Newsletter</a>
+        <a href="redes.html">Redes sociales</a>
+      </div>
+      <div class="ft-col">
+        <span class="ft-col-title">Ecosistema</span>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="https://grupoaprendesor.com" target="_blank">Grupo Aprendesor</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2025 Grupo Aprendesor · Todos los derechos reservados</p>
+    <p>Dedicado a Jesús · Soli Deo Gloria</p>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -731,7 +904,7 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('v'); });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.sh,.ph,.mcta,.bt,.bsb,.card,.cp-title,.cp-desc,.cp-cta,.cp-bar-wrap,.rtag,.rtit,.rsub,.sg').forEach(function (el) { io.observe(el); });
+  document.querySelectorAll('.sh,.ph,.mcta,.bt,.bsb,.card,.cp-title,.cp-desc,.cp-cta,.cp-bar-wrap,.rtag,.rtit,.rsub,.sg,.bfilt,.blog-more,.rp-title,.rp-desc,.rp-cta,.rp-cards').forEach(function (el) { io.observe(el); });
 
 })();
 </script>
@@ -758,6 +931,90 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
       menu.classList.remove('open');
       document.body.style.overflow='';
     });
+  });
+})();
+</script>
+
+<script>
+// BLOG DINÁMICO
+(function(){
+  var CAT_LABELS = {fe:'Fe & Carácter', disciplina:'Disciplina', finanzas:'Finanzas', negocios:'Negocios'};
+  var allArticles = [];
+  var activeCat = 'all';
+
+  function renderCards(articles){
+    var grid = document.getElementById('blog-grid');
+    if(!grid) return;
+    var featured = articles[0];
+    var rest = articles.slice(1, 7);
+    var html = '';
+    if(featured){
+      html += '<article class="card ft" style="cursor:pointer;" onclick="location.href=\'articulo.html?id=' + featured.id + '\'">';
+      html += '<div class="ft-body">';
+      html += '<span class="ccat">' + (CAT_LABELS[featured.categoria]||featured.categoria) + '</span>';
+      html += '<h3 class="ctit" style="font-size:clamp(1.3rem,2.5vw,2rem);margin-bottom:14px;">' + featured.titulo + '</h3>';
+      html += '<p class="cex">' + featured.excerpt + '</p>';
+      html += '</div>';
+      html += '<a href="articulo.html?id=' + featured.id + '" class="cl" style="white-space:nowrap;">Leer →</a>';
+      html += '</article>';
+    }
+    rest.forEach(function(a, i){
+      var hideClass = i >= 2 ? ' mob-hide' : '';
+      html += '<article class="card' + hideClass + '" style="cursor:pointer;" onclick="location.href=\'articulo.html?id=' + a.id + '\'">';
+      html += '<span class="ccat">' + (CAT_LABELS[a.categoria]||a.categoria) + '</span>';
+      html += '<h3 class="ctit">' + a.titulo + '</h3>';
+      html += '<p class="cex">' + a.excerpt + '</p>';
+      html += '<a href="articulo.html?id=' + a.id + '" class="cl">Leer →</a>';
+      html += '</article>';
+    });
+    grid.innerHTML = html;
+    setTimeout(function(){
+      grid.querySelectorAll('.card').forEach(function(c,i){
+        setTimeout(function(){ c.classList.add('v'); }, i * 60);
+      });
+    }, 40);
+    var more = document.getElementById('blog-more');
+    if(more) more.classList.add('v');
+  }
+
+  function filterAndRender(cat){
+    activeCat = cat;
+    var filtered = cat === 'all' ? allArticles : allArticles.filter(function(a){ return a.categoria === cat; });
+    renderCards(filtered);
+    // Update button states
+    document.querySelectorAll('.bf').forEach(function(b){
+      b.classList.toggle('act', b.dataset.cat === cat);
+    });
+    // Update "ver todos" href
+    var moreLink = document.querySelector('#blog-more a');
+    if(moreLink){
+      moreLink.href = cat === 'all' ? 'blog.html' : 'blog.html?cat=' + cat;
+      var count = cat === 'all' ? allArticles.length : allArticles.filter(function(a){return a.categoria===cat;}).length;
+      moreLink.querySelector('span').textContent = 'Ver los ' + count + ' artículos';
+    }
+  }
+
+  // Fetch JSON
+  fetch('articulos.json')
+    .then(function(r){ return r.json(); })
+    .catch(function(){
+      // inline fallback — use first few hardcoded if fetch fails
+      return [
+        {id:'disciplina-001',categoria:'disciplina',titulo:'El enfoque es una habilidad: cómo entrenarla sin motivación',excerpt:'La concentración no es un don. Es una habilidad que se desarrolla como el músculo — con práctica deliberada.'},
+        {id:'fe-001',categoria:'fe',titulo:'Cristo no es una referencia simbólica.',excerpt:'Es el modelo perfecto de humanidad. El hombre que lo toma en serio cambia todo.'},
+        {id:'finanzas-001',categoria:'finanzas',titulo:'Del primer sueldo al primer activo.',excerpt:'La brecha entre ganar dinero y construir riqueza es una sola decisión repetida mil veces.'}
+      ];
+    })
+    .then(function(data){
+      allArticles = data;
+      filterAndRender('all');
+    });
+
+  // Filter buttons
+  document.getElementById('bfilt').addEventListener('click', function(e){
+    var btn = e.target.closest('.bf');
+    if(!btn) return;
+    filterAndRender(btn.dataset.cat);
   });
 })();
 </script>
