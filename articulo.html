@@ -276,7 +276,14 @@ if (!id) {
       document.title = art.titulo + ' — Aprendesor';
       var catLabel = CAT_LABELS[art.categoria] || art.categoria;
       var tipoLabel = art.tipo === 'nota' ? ' // Nota' : art.tipo === 'concepto' ? ' // Concepto' : '';
-      document.getElementById('art-cat').textContent = catLabel + tipoLabel;
+      // Reading time
+      var words = 0;
+      if (art.contenido) art.contenido.forEach(function(b){
+        if(b.texto) words += b.texto.split(' ').length;
+        if(b.items) b.items.forEach(function(i){ words += i.split(' ').length; });
+      });
+      var rtime = Math.max(1, Math.round(words/200));
+      document.getElementById('art-cat').innerHTML = catLabel + tipoLabel + '<span style="margin-left:16px;color:rgba(255,255,255,.2);font-size:.44rem;">// ' + rtime + ' min de lectura</span>';
       document.getElementById('art-title').textContent = art.titulo;
       document.getElementById('art-excerpt').textContent = art.excerpt;
       document.getElementById('art-body').innerHTML = renderBody(art.contenido);

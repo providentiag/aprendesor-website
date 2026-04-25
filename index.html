@@ -70,6 +70,14 @@ body{background:var(--n);color:var(--b);font-family:'Space Mono',monospace;overf
 .btn span{position:relative;z-index:1;}
 .btno{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--b);padding:15px 34px;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;transition:border-color .3s,color .3s,transform .3s;}
 .btno:hover{border-color:var(--a);color:var(--a);transform:translateY(-2px);}
+/* SOCIAL PROOF */
+.hsp{display:flex;align-items:center;justify-content:center;gap:0;margin-top:48px;opacity:0;animation:fu 1s ease 1.4s forwards;flex-wrap:wrap;}
+.hsp-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 28px;}
+.hsp-div{width:1px;height:32px;background:rgba(255,255,255,.1);}
+.hsp-n{font-family:'Space Mono',monospace;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;color:var(--b);letter-spacing:-.02em;}
+.hsp-n.hsp-txt{font-size:clamp(.7rem,1.5vw,.95rem);letter-spacing:.05em;}
+.hsp-l{font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+@media(max-width:600px){.hsp-item{padding:8px 14px;}.hsp-div{width:32px;height:1px;}}
 .si{position:absolute;bottom:40px;left:44px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fi 1s ease 1.8s forwards;}
 .si span{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gl);opacity:.4;writing-mode:vertical-rl;}
 .sl{width:1px;height:48px;background:linear-gradient(to bottom,rgba(245,158,11,.6),transparent);animation:sp 2.5s ease-in-out infinite;}
@@ -491,6 +499,17 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
     <div class="hc">
       <a href="#manifiesto" class="btn"><span>Ver el manifiesto</span><span>↓</span></a>
       <a href="#redes" class="btno">Únete al movimiento</a>
+    </div>
+    <div class="hsp">
+      <div class="hsp-item">
+        <span class="hsp-n" data-target="325000">0</span>
+        <span class="hsp-l">seguidores</span>
+      </div>
+      <div class="hsp-div"></div>
+      <div class="hsp-item">
+        <span class="hsp-n" data-target="70000000">0</span>
+        <span class="hsp-l">vistas totales</span>
+      </div>
     </div>
   </div>
   <div class="si"><span>Scroll</span><div class="sl"></div></div>
@@ -932,6 +951,40 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
       document.body.style.overflow='';
     });
   });
+})();
+
+// ANIMATED COUNTERS
+(function(){
+  function formatNum(n){
+    if(n>=1000000) return (n/1000000).toFixed(0)+'M+';
+    if(n>=1000) return (n/1000).toFixed(0)+'K+';
+    return n.toString();
+  }
+  var counters=document.querySelectorAll('.hsp-n[data-target]');
+  var started=false;
+  function animate(){
+    if(started) return;
+    started=true;
+    counters.forEach(function(el){
+      var target=parseInt(el.dataset.target);
+      var duration=1800;
+      var start=performance.now();
+      function step(now){
+        var p=Math.min((now-start)/duration,1);
+        var ease=1-Math.pow(1-p,3);
+        el.textContent=formatNum(Math.round(ease*target));
+        if(p<1) requestAnimationFrame(step);
+        else el.textContent=formatNum(target);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var hsp=document.querySelector('.hsp');
+  if(!hsp){return;}
+  var ob=new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting) animate();
+  },{threshold:0.5});
+  ob.observe(hsp);
 })();
 </script>
 

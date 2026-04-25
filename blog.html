@@ -58,7 +58,16 @@ body{background:var(--n);color:var(--b);font-family:'Space Mono',monospace;overf
 .filters{display:flex;gap:2px;margin-bottom:40px;}
 .filt-btn{padding:10px 18px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(255,255,255,.4);font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:border-color .25s,color .25s,background .25s;}
 .filt-btn:hover{border-color:var(--br);color:var(--b);}
-.filt-btn.active{border-color:rgba(57,155,83,.5);background:rgba(57,155,83,.08);color:var(--b);}
+.filt-btn.active{border-color:var(--v2);background:rgba(57,155,83,.12);color:var(--b);box-shadow:inset 0 0 0 1px rgba(57,155,83,.35);}
+/* SEARCH */
+.search-bar{display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);padding:12px 18px;margin-bottom:24px;transition:border-color .3s;}
+.search-bar:focus-within{border-color:rgba(57,155,83,.4);}
+.search-icon{color:rgba(255,255,255,.25);font-size:1.1rem;line-height:1;}
+.search-input{flex:1;background:transparent;border:none;outline:none;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--b);caret-color:var(--v2);}
+.search-input::placeholder{color:rgba(255,255,255,.2);}
+.search-clear{background:transparent;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:.7rem;padding:0 4px;transition:color .25s;}
+.search-clear:hover{color:var(--a);}
+.search-highlight{background:rgba(57,155,83,.2);color:var(--b);border-radius:2px;padding:0 2px;}
 .count-bar{display:flex;align-items:center;gap:16px;margin-bottom:28px;}
 .count-txt{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);}
 .count-n{color:var(--v2);}
@@ -206,6 +215,11 @@ nav.on{background:rgba(10,10,10,.88);backdrop-filter:blur(14px);-webkit-backdrop
     <button class="filt-btn" data-cat="finanzas" onclick="filter('finanzas', this)">Finanzas</button>
     <button class="filt-btn" data-cat="negocios" onclick="filter('negocios', this)">Negocios</button>
   </div>
+  <div class="search-bar">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="search-input" class="search-input" placeholder="Buscar en el archivo..." autocomplete="off">
+    <button class="search-clear" id="search-clear" style="display:none;">✕</button>
+  </div>
   <div class="count-bar">
     <span class="count-txt">Mostrando <span class="count-n" id="count">0</span> artículos</span>
   </div>
@@ -236,32 +250,83 @@ var ARTICULOS_DATA = [{"id":"disciplina-001","categoria":"disciplina","titulo":"
 var CAT_LABELS = {fe:'Fe y Caracter', disciplina:'Disciplina', finanzas:'Finanzas', negocios:'Negocios'};
 var allArticles = [];
 var currentFilter = 'all';
+var currentSearch = '';
+
+function readingTime(art) {
+  var words = 0;
+  if (art.contenido) {
+    art.contenido.forEach(function(b) {
+      if (b.texto) words += b.texto.split(' ').length;
+      if (b.items) b.items.forEach(function(it){ words += it.split(' ').length; });
+    });
+  }
+  return Math.max(1, Math.round(words / 200)) + ' min';
+}
+
+function highlight(text, q) {
+  if (!q) return text;
+  var re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+  return text.replace(re, '<mark class="search-highlight">$1</mark>');
+}
 
 function renderGrid(articles) {
   var grid = document.getElementById('art-grid');
   document.getElementById('count').textContent = articles.length;
   if (articles.length === 0) {
-    grid.innerHTML = '<div class="empty"><p>No hay articulos en esta categoria todavia.</p></div>';
+    grid.innerHTML = '<div class="empty"><p>' + (currentSearch ? 'Sin resultados para &ldquo;' + currentSearch + '&rdquo;' : 'No hay art&iacute;culos en esta categor&iacute;a.') + '</p></div>';
     return;
   }
+  var q = currentSearch;
   grid.innerHTML = articles.map(function(a, i) {
-    var feat = (i === 0 && currentFilter === 'all') ? ' feat' : '';
+    var feat = (i === 0 && currentFilter === 'all' && !currentSearch) ? ' feat' : '';
     var tipoTag = a.tipo === 'nota' ? ' <span style="color:rgba(255,255,255,.3);font-size:.42rem;">// Nota</span>' : a.tipo === 'concepto' ? ' <span style="color:rgba(255,255,255,.3);font-size:.42rem;">// Concepto</span>' : '';
+    var rtime = readingTime(a);
     return '<a href="articulo.html?id=' + a.id + '" class="art-card' + feat + '">'
       + '<span class="ac-cat">' + (CAT_LABELS[a.categoria] || a.categoria) + tipoTag + '</span>'
-      + '<span class="ac-title">' + a.titulo + '</span>'
-      + '<p class="ac-ex">' + a.excerpt + '</p>'
-      + '<span class="ac-link">Leer nota --&gt;</span>'
+      + '<span class="ac-title">' + highlight(a.titulo, q) + '</span>'
+      + '<p class="ac-ex">' + highlight(a.excerpt, q) + '</p>'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;">'
+      + '<span class="ac-link">Leer --&gt;</span>'
+      + '<span style="font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);">' + rtime + '</span>'
+      + '</div>'
       + '</a>';
   }).join('');
+}
+
+function getFiltered() {
+  var base = currentFilter === 'all' ? allArticles : allArticles.filter(function(a){ return a.categoria === currentFilter; });
+  if (!currentSearch) return base;
+  var q = currentSearch.toLowerCase();
+  return base.filter(function(a){
+    return a.titulo.toLowerCase().indexOf(q) >= 0 || a.excerpt.toLowerCase().indexOf(q) >= 0;
+  });
 }
 
 function filter(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.filt-btn').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  var filtered = cat === 'all' ? allArticles : allArticles.filter(function(a) { return a.categoria === cat; });
-  renderGrid(filtered);
+  if (btn) btn.classList.add('active');
+  renderGrid(getFiltered());
+}
+
+// Search
+var searchInput = document.getElementById('search-input');
+var searchClear = document.getElementById('search-clear');
+if (searchInput) {
+  searchInput.addEventListener('input', function() {
+    currentSearch = searchInput.value.trim();
+    if (searchClear) searchClear.style.display = currentSearch ? 'block' : 'none';
+    renderGrid(getFiltered());
+  });
+}
+if (searchClear) {
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    currentSearch = '';
+    searchClear.style.display = 'none';
+    searchInput.focus();
+    renderGrid(getFiltered());
+  });
 }
 
 // Check for cat param in URL
@@ -272,7 +337,7 @@ loadArticles(function(articles) {
     if (urlCat && ['fe','disciplina','finanzas','negocios'].indexOf(urlCat) >= 0) {
       var btn = document.querySelector('.filt-btn[data-cat="' + urlCat + '"]');
       if (btn) filter(urlCat, btn);
-      else renderGrid(articles.filter(function(a) { return a.categoria === urlCat; }));
+      else { currentFilter = urlCat; renderGrid(getFiltered()); }
     } else {
       renderGrid(articles);
     }
